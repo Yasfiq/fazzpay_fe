@@ -1,11 +1,7 @@
-"use client";
 import { BsGrid } from "react-icons/bs";
 import { AiOutlineArrowUp, AiOutlinePlus } from "react-icons/ai";
-import { useState } from "react";
 
-const MenuBar = () => {
-  const [active, setActive] = useState("dashboard");
-
+const MenuBar = ({ active, setActive }) => {
   return (
     <>
       <div className="col-span-3 py-6">

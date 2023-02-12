@@ -1,4 +1,4 @@
-import FooterLarge from "@/components/organisms/Footer";
+import FooterLarge from "@/components/organisms/FooterLarge";
 import Link from "next/link";
 import FormPin from "./FormPin";
 

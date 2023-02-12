@@ -1,27 +1,18 @@
-const FooterLarge = () => {
+const Footer = () => {
   return (
     <>
-      <div className="bg-primary py-20 text-white w-screen">
-        <div className="container divide-y-2 divide-white">
-          <section className="footer-top mb-10">
-            <h1 className="font-bold text-3xl">Fazzpay</h1>
-            <p className="mt-8">
-              Simplify financial needs and saving
-              <br /> much time in banking needs with <br />
-              one single app.
-            </p>
-          </section>
-          <section className="footer-bottom pt-5 grid grid-cols-12">
-            <p className="copyright col-span-8">
-              2023 FazzPay. All right reserved.
-            </p>
-            <p className="col-span-2 text-end">+62 5637 8882 9901</p>
-            <p className="col-span-2 text-end">contact@fazzpay.com</p>
-          </section>
+      <div className="w-screen bg-primary py-5 text-white">
+        <div
+          className="container grid gap-x-8 items-center"
+          style={{ gridTemplateColumns: "1fr auto auto" }}
+        >
+          <h1 className="font-bold text-3xl">Fazzpay</h1>
+          <p>+62 5637 8882 9901</p>
+          <p>contact@fazzpay.com</p>
         </div>
       </div>
     </>
   );
 };
 
-export default FooterLarge;
+export default Footer;
