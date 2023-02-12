@@ -78,7 +78,10 @@ const FormRegister = () => {
           icons={<BiLockAlt />}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <p className="text-5xl text-gray-400" onClick={() => passwordVisible()}>
+        <p
+          className="md:text-5xl text-2xl text-gray-400"
+          onClick={() => passwordVisible()}
+        >
           {active ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
         </p>
         {error ? (

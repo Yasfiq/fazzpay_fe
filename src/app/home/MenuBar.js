@@ -1,7 +1,11 @@
+"use client";
 import { BsGrid } from "react-icons/bs";
 import { AiOutlineArrowUp, AiOutlinePlus } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
-const MenuBar = ({ active, setActive }) => {
+const MenuBar = ({ active }) => {
+  const navigate = useRouter();
+
   return (
     <>
       <div className="col-span-3 py-6">
@@ -11,7 +15,7 @@ const MenuBar = ({ active, setActive }) => {
               ? "border-primary text-primary"
               : "border-white"
           }`}
-          onClick={() => setActive("dashboard")}
+          onClick={() => navigate.push("/home")}
         >
           <BsGrid />
           Dashboard
@@ -22,7 +26,7 @@ const MenuBar = ({ active, setActive }) => {
               ? "border-primary text-primary"
               : "border-white"
           }`}
-          onClick={() => setActive("transfer")}
+          onClick={() => navigate.push("/transfer")}
         >
           <AiOutlineArrowUp />
           Transfer
@@ -31,7 +35,7 @@ const MenuBar = ({ active, setActive }) => {
           className={`text-2xl flex gap-x-4 items-center mb-16 cursor-pointer hover:text-primary pl-5 border-l-4 ${
             active === "topup" ? "border-primary text-primary" : "border-white"
           }`}
-          onClick={() => setActive("topup")}
+          onClick={() => navigate.push("/topup")}
         >
           <AiOutlinePlus />
           Top Up

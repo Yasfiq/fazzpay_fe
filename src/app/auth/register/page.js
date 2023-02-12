@@ -1,12 +1,14 @@
 import Link from "next/link";
 import Banner from "./Banner";
 import FormRegister from "./FormRegister";
+import MobileRegister from "./Mobile";
 import Teaser from "./Teaser";
 
 const Register = () => {
   return (
     <>
-      <div className="w-screen h-screen font-nunito-sans grid grid-cols-12">
+      <MobileRegister />
+      <div className="w-screen h-screen font-nunito-sans grid-cols-12 hidden md:grid">
         <Banner />
         <div className="md:col-span-6 pt-16 col-span-12 container">
           <Teaser />

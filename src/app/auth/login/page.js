@@ -2,11 +2,13 @@ import Link from "next/link";
 import Teaser from "../register/Teaser";
 import Banner from "./Banner";
 import FormLogin from "./FormLogin";
+import MobileLogin from "./Mobile";
 
 const Login = () => {
   return (
     <>
-      <div className="w-screen h-screen font-nunito-sans grid grid-cols-12">
+      <MobileLogin />
+      <div className="w-screen h-screen font-nunito-sans md:grid hidden grid-cols-12">
         <Banner />
         <div className="md:col-span-6 pt-16 col-span-12 container">
           <Teaser />
