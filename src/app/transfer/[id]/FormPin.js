@@ -2,13 +2,23 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import styles from "./confirm-pin.module.css";
+import styles from "../../create-pin/confirm-pin.module.css";
 
-const FormPin = () => {
+const FormPin = ({ amount, notes, time, receiver, setStatus, setActive }) => {
   const [pin, setPin] = useState(new Array(6).fill(""));
   let [activePin, setActivePin] = useState(0);
   const inputRef = useRef(null);
   const navigate = useRouter();
+  const [error, setError] = useState();
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
   const handleChange = (e, index) => {
     const { value } = e.target;
@@ -36,27 +46,44 @@ const FormPin = () => {
     if (!localStorage.getItem("@userLogin")) {
       navigate.push("/auth/login");
     }
+    if (localStorage.getItem("@userLogin")) {
+      if (JSON.parse(localStorage.getItem("@userLogin")).pin_number === null) {
+        navigate.push("/create-pin");
+      }
+    }
   }, []);
 
   const handleSubmit = () => {
-    const data = new URLSearchParams();
     const isPin = pin.join("");
-    data.append("pin_number", isPin);
+    const data = new URLSearchParams();
+    data.append("pin", isPin);
     const id = JSON.parse(localStorage.getItem("@userLogin")).id;
     axios
-      .patch(`https://funpayz.herokuapp.com/api/v1/user/${id}`, data)
+      .post(`https://funpayz.herokuapp.com/api/v1/user/confirm-pin/${id}`, data)
       .then((res) => {
-        const dataUser = JSON.parse(localStorage.getItem("@userLogin"));
-        localStorage.removeItem("@userLogin");
-        const newData = {
-          ...dataUser,
-          pin_number: isPin,
-        };
-        localStorage.setItem("@userLogin", JSON.stringify(newData));
-        navigate.push("/home");
+        const formdata = new URLSearchParams();
+        formdata.append(
+          "user_id",
+          JSON.parse(localStorage.getItem("@userLogin")).id
+        );
+        formdata.append("nominal", amount);
+        formdata.append("notes", notes);
+        const newTime = `${days[time.getDay()]}, ${
+          time.getMonth() + 1
+        } ${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
+        formdata.append("time", newTime);
+        axios
+          .post(
+            `https://funpayz.herokuapp.com/api/v1/transaction/${receiver.id}`,
+            formdata
+          )
+          .then((result) => {
+            setActive(false);
+            setStatus("OK");
+          });
       })
       .catch((err) => {
-        console.log(err.response.data.Error);
+        setError(err.response.data.Error);
       });
   };
   return (
@@ -77,15 +104,22 @@ const FormPin = () => {
           );
         })}
       </div>
+      {error ? (
+        <p className="mt-5 text-red-500 font-bold text-xl text-center">
+          {error}
+        </p>
+      ) : (
+        ""
+      )}
       {pin.join("").length === 6 ? (
         <button
-          className="btn-primary mt-20 w-full"
+          className="btn-primary mt-10 w-full"
           onClick={() => handleSubmit()}
         >
           Confirm
         </button>
       ) : (
-        <button className="btn-disabled mt-20 w-full">Confirm</button>
+        <button className="btn-disabled mt-10 w-full">Confirm</button>
       )}
     </>
   );

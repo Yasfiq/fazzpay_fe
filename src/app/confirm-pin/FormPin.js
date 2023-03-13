@@ -50,7 +50,7 @@ const FormPin = () => {
     data.append("pin", isPin);
     const id = JSON.parse(localStorage.getItem("@userLogin")).id;
     axios
-      .post(`http://localhost:3001/api/v1/user/confirm-pin/${id}`, data)
+      .post(`https://funpayz.herokuapp.com/api/v1/user/confirm-pin/${id}`, data)
       .then((res) => {
         const dataUser = JSON.parse(localStorage.getItem("@userLogin"));
         const newData = {

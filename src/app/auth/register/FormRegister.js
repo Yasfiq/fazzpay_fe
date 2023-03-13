@@ -32,10 +32,10 @@ const FormRegister = () => {
     formdata.append("password", password);
     const data = new URLSearchParams(formdata);
     axios
-      .post(`http://localhost:3001/api/v1/auth/register`, data)
+      .post(`https://funpayz.herokuapp.com/api/v1/auth/register`, data)
       .then((res) => {
         axios
-          .post(`http://localhost:3001/api/v1/auth/login`, data)
+          .post(`https://funpayz.herokuapp.com/api/v1/auth/login`, data)
           .then((result) => {
             localStorage.setItem(
               "@userLogin",
