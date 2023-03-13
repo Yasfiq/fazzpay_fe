@@ -51,25 +51,29 @@ const Header = () => {
         <nav className="container py-6 flex justify-between items-center">
           <h1 className="font-bold text-3xl text-primary">Fazzpay</h1>
           <div className="flex space-x-6 items-center">
-            <Avatar
-              image={
-                localStorage.getItem("@userLogin") &&
-                JSON.parse(localStorage.getItem("@userLogin")).profile_image
-              }
-            >
-              <li className="p-3 hover:bg-gray-200 cursor-pointer">Profile</li>
-              <li className="p-3 hover:bg-gray-200 cursor-pointer">Help</li>
-              <hr className="border-t border-gray-600 mt-2" />
-              <li
-                className="p-2 mt-3 rounded-lg bg-red-500 text-white text-center cursor-pointer font-bold hover:bg-red-600"
-                onClick={() => {
-                  localStorage.removeItem("@userLogin");
-                  navigate.push("/auth/login");
-                }}
+            {typeof window !== "undefined" && (
+              <Avatar
+                image={
+                  localStorage.getItem("@userLogin") &&
+                  JSON.parse(localStorage.getItem("@userLogin")).profile_image
+                }
               >
-                Logout
-              </li>
-            </Avatar>
+                <li className="p-3 hover:bg-gray-200 cursor-pointer">
+                  Profile
+                </li>
+                <li className="p-3 hover:bg-gray-200 cursor-pointer">Help</li>
+                <hr className="border-t border-gray-600 mt-2" />
+                <li
+                  className="p-2 mt-3 rounded-lg bg-red-500 text-white text-center cursor-pointer font-bold hover:bg-red-600"
+                  onClick={() => {
+                    localStorage.removeItem("@userLogin");
+                    navigate.push("/auth/login");
+                  }}
+                >
+                  Logout
+                </li>
+              </Avatar>
+            )}
             <div className="dropdown dropdown-bottom dropdown-end">
               <label tabIndex={0} className="text-3xl cursor-pointer">
                 <FiBell />

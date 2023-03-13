@@ -20,6 +20,7 @@
     "recharts": "^2.4.1"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^13.2.4",
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
     "autoprefixer": "^10.4.13",
